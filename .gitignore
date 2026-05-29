@@ -1,0 +1,5 @@
+# 各フォルダの巨大ゴミ箱を無視する
+backend/node_modules/
+frontend/node_modules/
+frontend/dist/
+.env

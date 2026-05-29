@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String   @unique
+  rating   Int      @default(1500)
+}
+
+model Match {
+  id        Int      @id @default(autoincrement())
+  status    String   @default("WAITING")
+  players   Json     
+  logs      Json?    
+  createdAt DateTime @default(now())
+}
