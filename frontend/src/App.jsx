@@ -24,12 +24,22 @@ const YAKU_TRANSLATION = {
 export default function App() {
   const [gameState, setGameState] = useState(null);
   const [roomId, setRoomId] = useState('sys-metrics-test'); 
-  const [userName, setUserName] = useState(`User${Math.floor(Math.random() * 900 + 100)}`);
+  const [useId] = useState(()=> {
+    let id = localStorage.getItem('mahjong_user_id');
+    if (!id) {
+      id = `ID_${Math.random().toString(36).substr(2,9)}`;
+      localStorage.setItem('mahjong_user_id',id);
+    }
+    return id;
+  })
+  const [userName, setUserName] = useState(()=> localStorage.getItem('mahjong_use_name') || `User${Math.floor(Math.random()*900 + 100)}`)
   const [joined, setJoined] = useState(false);
   const [activeEffect, setActiveEffect] = useState(null);
   const [danmakuList, setDanmakuList] = useState([]);
   const [commentInput, setCommentInput] = useState('');
   const [autoNextSec, setAutoNextSec] = useState(8);
+
+
 
   useEffect(() => {
     socket.connect();
@@ -87,8 +97,9 @@ export default function App() {
   }, [gameState?.status]);
 
   const handleJoin = (mode) => {
-    socket.emit('join_room', { roomId, userName, requestedRole: mode });
-    setJoined(true);
+    localStorage.setItem('mahjong_user_name', userName);
+    socket.emit('join_room', {roomId, userName, requstedRole: mode, userId});
+    setJoined(true)
   };
 
   const sendComment = (e) => {

@@ -1,4 +1,5 @@
 // backend/src/gameEngine.js (送信漏れ完全解決・最終決定版)
+const e = require('express');
 const Riichi = require('riichi');
 
 class GameEngine {
@@ -236,13 +237,23 @@ class GameEngine {
 
 
   joinRoom(id, name, requestedRole) {
-    if (requestedRole === 'player' && this.players.length < 4 && this.status === 'WAITING') {
+    const existingPlayer = this.players.find(p => p.userId === userID);
+    if (existingPlayer){
+      existingPlayer.id = id;
+      existingPlayer.name = name;
+      return { role : 'player', seat:existingPlayer,seat};
+
+    }
+    const existingSpec = this.spectators.find(s => s.userId === userId);
+    if(existingSpec){
+      existingSpec.id = id;
+      existingSpec.name = name;
+      return {role : 'spectator', seat : null};
+    }
+    if (requestedRole === 'player' && this.players.length < 4 && this.status === 'WAITING'){
       const seat = this.players.length;
-      this.players.push({ id, seat, name, furiten: false, isReady: false, waitingTiles: [] });
-      return { role: 'player', seat };
-    } else {
-      this.spectators.push({ id, name });
-      return { role: 'spectator', seat: null };
+      this.players.push({ id, userId, seat, name, furiten: false, isReady: false, waitingTiles: []});
+      return { role: 'player', seat: null};
     }
   }
 

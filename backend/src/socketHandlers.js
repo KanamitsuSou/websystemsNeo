@@ -5,12 +5,12 @@ const activeTimers = {};
 
 module.exports = (io, socket, rooms) => {
   
-  socket.on('join_room', ({ roomId, userName, requestedRole }) => {
+  socket.on('join_room', ({ roomId, userName, requestedRole, userId }) => {
     socket.join(roomId);
     if (!rooms[roomId]) rooms[roomId] = new GameEngine();
     const game = rooms[roomId];
 
-    const { role, seat } = game.joinRoom(socket.id, userName, requestedRole || 'player');
+    const { role, seat } = game.joinRoom(socket.id, userName, requestedRole || 'player',userId);
     console.log(`[${role}] ${userName} が部屋 ${roomId} に入室。`);
 
     if (game.players.length === 4 && game.status === 'WAITING') {
