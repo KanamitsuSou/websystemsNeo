@@ -151,10 +151,7 @@ export default function App() {
         @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; color: #ffb300; } }
       `}</style>
 
-      <div style={{ position: 'absolute', top: '20px', right: '180px', display: 'flex', gap: '10px', zIndex: 99999 }}>
-        <button onClick={() => socket.emit('cheat_exhaustive_draw', { roomId })} style={{ padding: '8px 14px', fontSize: '12px', backgroundColor: '#d35400', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 2px 5px rgba(0,0,0,0.3)' }}>🛠️ デバッグ:即流局</button>
-        <button onClick={() => socket.emit('cheat_win_hand', { roomId })} style={{ padding: '8px 14px', fontSize: '12px', backgroundColor: '#27ae60', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 2px 5px rgba(0,0,0,0.3)' }}>🛠️ デバッグ:即ツモ準備</button>
-      </div>
+      
 
       <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', pointerEvents: 'none', zIndex: 999999 }}>
         {danmakuList.map(comment => (
