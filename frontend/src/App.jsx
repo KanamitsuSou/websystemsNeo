@@ -185,7 +185,7 @@ export default function App() {
       )}
 
       <button onClick={handleResetGame} style={{ position: 'absolute', top: '20px', right: '20px', padding: '8px 16px', fontSize: '13px', backgroundColor: 'rgba(192, 41, 43, 0.2)', color: '#ff9ff3', border: '1px solid rgba(192, 41, 43, 0.6)', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', zIndex: 99999, transition: 'all 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(192, 41, 43, 0.8)'} onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(192, 41, 43, 0.2)'}>
-        ⚠️ Terminate Environment
+        ⚠️ ゲームを終了する
       </button>
 
       <Board gameState={gameState} onDiscard={handleDiscard} />

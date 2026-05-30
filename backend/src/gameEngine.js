@@ -234,24 +234,6 @@ class GameEngine {
     return { yaku, points, text, han, fu };
   }
 
-  forceExhaustiveDraw() {
-    this.pendingActions = [];
-    if (this.wall.length > 9) this.wall = this.wall.slice(0, 9);
-    this.status = 'PLAYING';
-    this.executeTurnStart();
-  }
-
-  forceSetupCheatHand(seat) {
-    this.pendingActions = [];
-    this.currentTurn = seat;
-    while(this.wall.length <= 10) this.wall.push('m1');
-    this.hands[seat] = ['s2', 's2', 's2', 's3', 's3', 's3', 's4', 's4', 's4', 's5', 's5', 's5', 's6'];
-    this.melds[seat] = []; 
-    this.hands[seat].sort();
-    this.wall.push('s6'); 
-    this.status = 'PLAYING';
-    this.executeTurnStart();
-  }
 
   joinRoom(id, name, requestedRole) {
     if (requestedRole === 'player' && this.players.length < 4 && this.status === 'WAITING') {
